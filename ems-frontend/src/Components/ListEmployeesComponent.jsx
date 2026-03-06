@@ -55,13 +55,18 @@ initialValue: The initial value of the state when the component first renders.
   }
 
   return (
-    <div className="container">
-      <h2 className="text-center table-heading-style">Staff Roster</h2>
-      <button className="btn btn-info mb-2" onClick={addNewEmployee}>
+    <div className="max-w-13xl mx-auto px-6 py-6">
+      <br />
+      <h2 className="text-center playwrite-us-modern">Staff Roster</h2>
+      <hr></hr>
+      <button
+        className="bg-[#505081] text-white px-4 py-2 mb-2 rounded josefin-sans-link hover:bg-blue-600"
+        onClick={addNewEmployee}
+      >
         Add Employee
       </button>
-      <table className="table table-striped table-info">
-        <thead>
+      <table className="min-w-full border border-gray-200 bg-[#272757] text-white rounded-lg overflow-hidden">
+        <thead className="bg-[#272757] text-white">
           <tr>
             <th>ID</th>
             <th>First Name</th>
@@ -78,7 +83,10 @@ initialValue: The initial value of the state when the component first renders.
             console.log(employee.dob, employee.dept);
 
             return (
-              <tr key={employee.id}>
+              <tr
+                key={employee.id}
+                className="odd:bg-[#2f2f6b] even:bg-[#3a3a82] hover:bg-blue-500/30 transition"
+              >
                 <td>{employee.id}</td>
                 <td>{employee.firstName}</td>
                 <td>{employee.lastName}</td>
@@ -86,20 +94,22 @@ initialValue: The initial value of the state when the component first renders.
                 <td>{employee.phoneno}</td>
                 <td>{employee.dob}</td>
                 <td>{employee.dept}</td>
-                <td>
-                  <button
-                    className="btn btn-info"
-                    onClick={() => updateEmployee(employee.id)}
-                  >
-                    Update
-                  </button>
-                  <button
-                    className="btn btn-danger"
-                    style={{ marginLeft: "10px" }}
-                    onClick={() => removeEmployee(employee.id)}
-                  >
-                    Delete
-                  </button>
+                <td className="px-4 py-2">
+                  <div className="flex gap-2">
+                    <button
+                      className="bg-[#5757db] text-white px-3 py-1 rounded-md text-sm hover:bg-blue-600 transition shadow-sm"
+                      onClick={() => updateEmployee(employee.id)}
+                    >
+                      Update
+                    </button>
+
+                    <button
+                      className="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition shadow-sm"
+                      onClick={() => removeEmployee(employee.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </td>
               </tr>
             );

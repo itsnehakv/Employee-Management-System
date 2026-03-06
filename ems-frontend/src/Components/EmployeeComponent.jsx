@@ -129,9 +129,18 @@ const EmployeeComponent = () => {
 
   function pageTitle() {
     if (id) {
-      return <h2 className="text-center">Update Employee</h2>;
+      return (
+        <h2 className="text-center josefin-sans-link">
+          <br />
+          Update Employee
+        </h2>
+      );
     } else {
-      return <h2 className="text-center">Add Employee</h2>;
+      return (
+        <h2 className="text-center josefin-sans-link">
+          <br></br>Add Employee
+        </h2>
+      );
     }
   }
 
@@ -154,130 +163,136 @@ const EmployeeComponent = () => {
     }
   }, [id]);
   return (
-    <div className="container">
-      <br></br>
-      <br></br>
-      <div className="row">
-        <div className="card col-md-6 offset-md-3 offset-md-3">
-          {pageTitle()}
-          <div className="card-body">
-            <form>
-              {/* First Name */}
-              <div className="form-group mb-2">
-                <label className="form-label">First Name :</label>
-                <input
-                  type="text"
-                  placeholder="Enter First Name"
-                  name="firstName"
-                  className={`form-control ${
-                    errors.firstName ? "is-invalid" : ""
-                  }`} //is-invalid is from bootstrap; this statement is like if-else
-                  value={firstName}
-                  onChange={handlefirstName}
-                />
-                {errors.firstName && (
-                  <div className="invalid-feedback">{errors.firstName} </div>
-                )}
-              </div>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="bg-white shadow-lg rounded-lg w-full max-w-lg p-6">
+        {pageTitle()}
+        {/* <div className="card-body "> */}
+        <div className="bg-white shadow-lg rounded-lg w-full max-w-lg p-6">
+          <form>
+            {/* First Name */}
+            <div className="form-group mb-2">
+              <label className="form-label josefin-sans-link">
+                First Name :
+              </label>
+              <input
+                type="text"
+                placeholder="Enter First Name"
+                name="firstName"
+                className={`form-control ${
+                  errors.firstName ? "is-invalid" : ""
+                }`} //is-invalid is from bootstrap; this statement is like if-else
+                value={firstName}
+                onChange={handlefirstName}
+              />
+              {errors.firstName && (
+                <div className="invalid-feedback">{errors.firstName} </div>
+              )}
+            </div>
 
-              {/* Last Name */}
-              <div className="form-group mb-2">
-                <label className="form-label">Last Name :</label>
-                <input
-                  type="text"
-                  placeholder="Enter Last Name"
-                  name="lastName"
-                  className={`form-control ${
-                    errors.lastName ? "is-invalid" : ""
-                  }`}
-                  value={lastName}
-                  onChange={handlelastName}
-                />
-                {errors.lastName && (
-                  <div className="invalid-feedback">{errors.lastName} </div>
-                )}
-              </div>
+            {/* Last Name */}
+            <div className="form-group mb-2">
+              <label className="form-label josefin-sans-link">
+                Last Name :
+              </label>
+              <input
+                type="text"
+                placeholder="Enter Last Name"
+                name="lastName"
+                className={`form-control ${
+                  errors.lastName ? "is-invalid" : ""
+                }`}
+                value={lastName}
+                onChange={handlelastName}
+              />
+              {errors.lastName && (
+                <div className="invalid-feedback">{errors.lastName} </div>
+              )}
+            </div>
 
-              {/* Email ID */}
-              <div className="form-group mb-2">
-                <label className="form-label">Email :</label>
-                <input
-                  type="text"
-                  placeholder="Enter Email"
-                  name="email"
-                  className={`form-control ${errors.email ? "is-invalid" : ""}`}
-                  value={email}
-                  onChange={handleemail}
-                />
-                {errors.email && (
-                  <div className="invalid-feedback">{errors.email} </div>
-                )}
-              </div>
+            {/* Email ID */}
+            <div className="form-group mb-2">
+              <label className="form-label josefin-sans-link">Email :</label>
+              <input
+                type="text"
+                placeholder="Enter Email"
+                name="email"
+                className={`form-control ${errors.email ? "is-invalid" : ""}`}
+                value={email}
+                onChange={handleemail}
+              />
+              {errors.email && (
+                <div className="invalid-feedback">{errors.email} </div>
+              )}
+            </div>
 
-              {/* Phone No */}
-              <div className="form-group mb-2">
-                <label className="form-label">Phone No. :</label>
-                <input
-                  type="text"
-                  placeholder="Enter Phone No."
-                  name="phoneno"
-                  className={`form-control ${
-                    errors.phoneno ? "is-invalid" : ""
-                  }`}
-                  value={phoneno}
-                  onChange={handlephoneNo}
-                />
-                {errors.phoneno && (
-                  <div className="invalid-feedback">{errors.phoneno} </div>
-                )}
-              </div>
+            {/* Phone No */}
+            <div className="form-group mb-2">
+              <label className="form-label josefin-sans-link">
+                Phone No. :
+              </label>
+              <input
+                type="text"
+                placeholder="Enter Phone No."
+                name="phoneno"
+                className={`form-control ${errors.phoneno ? "is-invalid" : ""}`}
+                value={phoneno}
+                onChange={handlephoneNo}
+              />
+              {errors.phoneno && (
+                <div className="invalid-feedback">{errors.phoneno} </div>
+              )}
+            </div>
 
-              {/* DOB */}
-              <div className="form-group mb-2">
-                <label className="form-label">Date Of Birth :</label>
-                <input
-                  type="date"
-                  placeholder="Enter Date Of Birth"
-                  name="dob"
-                  className={`form-control ${errors.dob ? "is-invalid" : ""}`}
-                  value={dob}
-                  onChange={handleDOB}
-                />
-                {errors.dob && (
-                  <div className="invalid-feedback">{errors.dob} </div>
-                )}
-              </div>
+            {/* DOB */}
+            <div className="form-group mb-2">
+              <label className="form-label josefin-sans-link">
+                Date Of Birth :
+              </label>
+              <input
+                type="date"
+                placeholder="Enter Date Of Birth"
+                name="dob"
+                className={`form-control ${errors.dob ? "is-invalid" : ""}`}
+                value={dob}
+                onChange={handleDOB}
+              />
+              {errors.dob && (
+                <div className="invalid-feedback">{errors.dob} </div>
+              )}
+            </div>
 
-              {/* Department */}
-              <div className="form-group mb-2">
-                <label className="form-label">Department :</label>
-                <br></br>
-                <select
-                  value={dept}
-                  onChange={handledept}
-                  style={{ width: "100%" }}
-                  className={`form-control ${errors.dept ? "is-invalid" : ""}`}
-                >
-                  <option value="">Select Department</option>
-                  <option value="HR">HR</option>
-                  <option value="IT">IT</option>
-                  <option value="Sales">Sales</option>
-                  <option value="Product Management">Product Management</option>
-                  <option value="Finance">Finance</option>
-                </select>
-                {errors.dept && (
-                  <div className="invalid-feedback">{errors.dept} </div>
-                )}
-              </div>
-              <button
-                className="btn btn-success"
-                type="submit"
-                onClick={SaveOrUpdateEmployee}
+            {/* Department */}
+            <div className="form-group mb-2">
+              <label className="form-label josefin-sans-link">
+                Department :
+              </label>
+              <br></br>
+              <select
+                value={dept}
+                onChange={handledept}
+                style={{ width: "100%" }}
+                className={`form-control ${errors.dept ? "is-invalid" : ""}`}
               >
-                Submit
-              </button>
-            </form>
-          </div>
+                <option value="">Select Department</option>
+                <option value="HR">HR</option>
+                <option value="IT">IT</option>
+                <option value="Sales">Sales</option>
+                <option value="Product Management">Product Management</option>
+                <option value="Finance">Finance</option>
+              </select>
+              {errors.dept && (
+                <div className="invalid-feedback">{errors.dept} </div>
+              )}
+            </div>
+            <br />
+            <button
+              className="bg-[#4ab54a] text-white px-3 py-1 josefin-sans-link rounded-md text-sm hover:bg-[#6ec46e] transition shadow-sm"
+              type="submit"
+              onClick={SaveOrUpdateEmployee}
+            >
+              Submit
+            </button>
+          </form>
         </div>
       </div>
     </div>
