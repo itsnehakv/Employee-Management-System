@@ -8,7 +8,7 @@ import { EmployeeComponent } from "./Components/EmployeeComponent";
 
 function App() {
   return (
-    <>
+    <div className="bg-[#8686AC]">
       <BrowserRouter>
         <HeaderComponent />
         <Routes>
@@ -27,7 +27,7 @@ function App() {
         <br></br>
         <FooterComponent />
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 
