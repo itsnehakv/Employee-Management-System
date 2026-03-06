@@ -39,7 +39,7 @@ initialValue: The initial value of the state when the component first renders.
   }
 
   function updateEmployee(id) {
-    navigate(`/edit-employee/${id}`); //note the backticks `` , because of variable id
+    navigate(`/edit-employee/${id}`);
   }
 
   function removeEmployee(id) {
@@ -75,7 +75,7 @@ initialValue: The initial value of the state when the component first renders.
         </thead>
         <tbody>
           {employees.map((employee) => {
-            console.log(employee.dob, employee.dept); // <-- here
+            console.log(employee.dob, employee.dept);
 
             return (
               <tr key={employee.id}>
