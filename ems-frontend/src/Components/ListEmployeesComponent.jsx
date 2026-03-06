@@ -6,6 +6,7 @@ import { deleteEmployeeById } from "../Services/EmployeeService";
 
 function ListEmployeesComponent() {
   const [employees, setEmployee] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   /* const [state, setState] = useState(initialValue);
 state: The current value of the state variable.
@@ -26,12 +27,16 @@ initialValue: The initial value of the state when the component first renders.
   const navigate = useNavigate();
 
   function getAllEmployees() {
+    setLoading(true);
+
     listEmployees()
       .then((response) => {
         setEmployee(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching employee data:", error);
+        setLoading(false);
       });
   }
   function addNewEmployee() {
@@ -56,67 +61,81 @@ initialValue: The initial value of the state when the component first renders.
 
   return (
     <div className="max-w-13xl mx-auto px-6 py-6">
-      <br />
-      <h2 className="text-center playwrite-us-modern">Staff Roster</h2>
-      <hr></hr>
-      <button
-        className="bg-[#505081] text-white px-4 py-2 mb-2 rounded josefin-sans-link hover:bg-blue-600"
-        onClick={addNewEmployee}
-      >
-        Add Employee
-      </button>
-      <table className="min-w-full border border-gray-200 bg-[#272757] text-white rounded-lg overflow-hidden">
-        <thead className="bg-[#272757] text-white">
-          <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone No</th>
-            <th>Date of Birth</th>
-            <th>Department</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {employees.map((employee) => {
-            console.log(employee.dob, employee.dept);
-
-            return (
-              <tr
-                key={employee.id}
-                className="odd:bg-[#2f2f6b] even:bg-[#3a3a82] hover:bg-blue-500/30 transition"
-              >
-                <td>{employee.id}</td>
-                <td>{employee.firstName}</td>
-                <td>{employee.lastName}</td>
-                <td>{employee.email}</td>
-                <td>{employee.phoneno}</td>
-                <td>{employee.dob}</td>
-                <td>{employee.dept}</td>
-                <td className="px-4 py-2">
-                  <div className="flex gap-2">
-                    <button
-                      className="bg-[#5757db] text-white px-3 py-1 rounded-md text-sm hover:bg-blue-600 transition shadow-sm"
-                      onClick={() => updateEmployee(employee.id)}
-                    >
-                      Update
-                    </button>
-
-                    <button
-                      className="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition shadow-sm"
-                      onClick={() => removeEmployee(employee.id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
+      {loading ? (
+        // Spinner
+        <div className="flex justify-center items-center py-10">
+          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      ) : employees.length === 0 ? (
+        // Empty state
+        <p className="text-gray-500 text-center py-10 josefin-sans-link">
+          No employees yet.
+        </p>
+      ) : (
+        <>
+          <br />
+          <h2 className="text-center playwrite-us-modern">Staff Roster</h2>
+          <hr></hr>
+          <button
+            className="bg-[#505081] text-white px-4 py-2 mb-2 rounded josefin-sans-link hover:bg-blue-600"
+            onClick={addNewEmployee}
+          >
+            Add Employee
+          </button>
+          <table className="min-w-full border border-gray-200 bg-[#272757] text-white rounded-lg overflow-hidden">
+            <thead className="bg-[#272757] text-white">
+              <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone No</th>
+                <th>Date of Birth</th>
+                <th>Department</th>
+                <th>Actions</th>
               </tr>
-            );
-          })}
-          <tr></tr>
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              {employees.map((employee) => {
+                console.log(employee.dob, employee.dept);
+
+                return (
+                  <tr
+                    key={employee.id}
+                    className="odd:bg-[#2f2f6b] even:bg-[#3a3a82] hover:bg-blue-500/30 transition"
+                  >
+                    <td>{employee.id}</td>
+                    <td>{employee.firstName}</td>
+                    <td>{employee.lastName}</td>
+                    <td>{employee.email}</td>
+                    <td>{employee.phoneno}</td>
+                    <td>{employee.dob}</td>
+                    <td>{employee.dept}</td>
+                    <td className="px-4 py-2">
+                      <div className="flex gap-2">
+                        <button
+                          className="bg-[#5757db] text-white px-3 py-1 rounded-md text-sm hover:bg-blue-600 transition shadow-sm"
+                          onClick={() => updateEmployee(employee.id)}
+                        >
+                          Update
+                        </button>
+
+                        <button
+                          className="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition shadow-sm"
+                          onClick={() => removeEmployee(employee.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+              <tr></tr>
+            </tbody>
+          </table>
+        </>
+      )}
     </div>
   );
 }
