@@ -1,6 +1,6 @@
 import React from "react";
 
-export const HeaderComponent = () => {
+export const HeaderComponent = ({ darkMode, setDarkMode }) => {
   return (
     <header className="bg-gradient-to-r from-[#272757] to-[#505081] shadow-md">
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-8 py-3">
@@ -29,6 +29,16 @@ export const HeaderComponent = () => {
           >
             LinkedIn
           </a>
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className={`relative w-14 h-7 flex items-center rounded-full p-1 transition-colors duration-300 
+  ${darkMode ? "bg-gray-700" : "bg-yellow-400"}`}
+          >
+            <div
+              className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300
+    ${darkMode ? "translate-x-7" : ""}`}
+            />
+          </button>
         </div>
       </nav>
     </header>
