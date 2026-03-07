@@ -174,7 +174,7 @@ const EmployeeComponent = () => {
           onClick={() => navigate("/employees")}
           className="text-sm text-[#505081] hover:underline mb-2"
         >
-          ← Back to Employees
+          ← Back to Staff Roster
         </button>
         {pageTitle()}
         <form>
@@ -276,17 +276,28 @@ const EmployeeComponent = () => {
             </label>
             <br></br>
             <select
-              value={dept}
-              onChange={handledept}
-              style={{ width: "100%" }}
-              className={`form-control ${errors.dept ? "is-invalid" : ""}`}
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
+         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+         bg-white text-gray-700 cursor-pointer"
             >
-              <option value="">Select Department</option>
-              <option value="HR">HR</option>
-              <option value="IT">IT</option>
-              <option value="Sales">Sales</option>
-              <option value="Product Management">Product Management</option>
-              <option value="Finance">Finance</option>
+              <option value="" disabled selected class="text-gray-400">
+                Select Department
+              </option>
+              <option value="HR" className="bg-indigo-200">
+                HR
+              </option>
+              <option value="IT" className="bg-indigo-200">
+                IT
+              </option>
+              <option value="Sales" className="bg-indigo-200">
+                Sales
+              </option>
+              <option value="Product Management" className="bg-indigo-200">
+                Product Management
+              </option>
+              <option value="Finance" className="bg-indigo-200">
+                Finance
+              </option>
             </select>
             {errors.dept && (
               <div className="invalid-feedback">{errors.dept} </div>
