@@ -3,10 +3,11 @@ import { listEmployees } from "../Services/EmployeeService";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
 import { deleteEmployeeById } from "../Services/EmployeeService";
-
+import Swal from "sweetalert2";
 function ListEmployeesComponent() {
   const [employees, setEmployee] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   /* const [state, setState] = useState(initialValue);
 state: The current value of the state variable.
@@ -25,6 +26,14 @@ initialValue: The initial value of the state when the component first renders.
   */
 
   const navigate = useNavigate();
+
+  const filteredEmployees = employees.filter(
+    (employee) =>
+      employee.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.id.toString().includes(searchTerm)
+  );
 
   function getAllEmployees() {
     setLoading(true);
@@ -48,15 +57,38 @@ initialValue: The initial value of the state when the component first renders.
   }
 
   function removeEmployee(id) {
-    console.log("Delete employee with id:", id);
+    console.log("Deleting employee:", id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This employee will be permanently deleted.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#505081",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteEmployeeById(id)
+          .then(() => {
+            Swal.fire({
+              icon: "success",
+              title: "Deleted!",
+              text: "Employee has been deleted.",
+              confirmButtonColor: "#505081",
+            });
 
-    deleteEmployeeById(id)
-      .then((response) => {
-        getAllEmployees();
-      })
-      .catch((error) => {
-        console.error("Error deleting employee:", error);
-      });
+            getAllEmployees(); // refresh list
+          })
+          .catch((error) => {
+            console.error("Delete failed:", error);
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "Failed to delete employee",
+            });
+          });
+      }
+    });
   }
 
   return (
@@ -76,15 +108,31 @@ initialValue: The initial value of the state when the component first renders.
           <br />
           <h2 className="text-center playwrite-us-modern">Staff Roster</h2>
           <hr></hr>
-          <button
-            className="bg-[#505081] text-white px-4 py-2 mb-2 rounded josefin-sans-link hover:bg-blue-600"
-            onClick={addNewEmployee}
-          >
-            Add Employee
-          </button>
+          <div className="flex items-center justify-between mb-4">
+            <button
+              className="bg-[#505081] text-white px-4 py-2 mb-2 rounded josefin-sans-link hover:bg-blue-500/30 transition"
+              onClick={addNewEmployee}
+            >
+              Add Employee
+            </button>
+            <div style={{ marginBottom: "15px" }}>
+              <input
+                type="text"
+                placeholder="Search employee..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="form-control"
+              />
+            </div>
+            <p className="text-md text-[#272757] mb-2 dark:text-gray-300 josefin-sans-link">
+              Total Employees:{" "}
+              <span className="font-semibold">{employees.length}</span>
+            </p>
+          </div>
+
           <table className="min-w-full border border-gray-200 bg-[#272757] text-white rounded-lg overflow-hidden">
-            <thead className="bg-[#272757] text-white">
-              <tr>
+            <thead className="sticky top-0 bg-[#272757] text-white">
+              <tr className="hover:bg-[#3f3f8d] transition">
                 <th>ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -96,7 +144,7 @@ initialValue: The initial value of the state when the component first renders.
               </tr>
             </thead>
             <tbody>
-              {employees.map((employee) => {
+              {filteredEmployees.map((employee) => {
                 console.log(employee.dob, employee.dept);
 
                 return (
