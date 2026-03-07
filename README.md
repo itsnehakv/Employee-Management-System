@@ -59,7 +59,7 @@ Manual record-keeping and local data storage create significant operational risk
   Client-side validation with alert notifications for user actions.
 - **Cloud Database Integration**  
   The application is deployed using a distributed cloud setup: the React frontend is hosted on **Vercel**, the Spring Boot backend runs on **Render**, and persistent data is stored in a **managed MySQL database on Aiven**.
-# Tech Stack
+## Tech Stack
 
 | Category | Technology | Implementation |
 |---|---|---|
@@ -73,4 +73,56 @@ Manual record-keeping and local data storage create significant operational risk
 | **Containerization** | Docker | Backend packaged into portable container |
 | **Deployment** | Render + Vercel | Cloud hosting with CI/CD integration |
 
+## System Architecture
+
+1. **User Interaction Layer:**  
+   Users interact with the application through a responsive **React (Vite)** frontend. The interface allows employees to be created, updated, viewed, and deleted through structured forms and a dynamic roster view. **React Router** manages client-side navigation, while **Axios** handles asynchronous HTTP requests to the backend API.
+2. **API Communication Layer:**  
+   The frontend communicates with the backend through a set of RESTful endpoints exposed by a **Spring Boot** application. These endpoints process incoming requests, perform validation, and coordinate the necessary database operations for employee record management.
+3. **Application Logic & Persistence Layer:**  
+   Business logic is implemented within the **Spring Boot service layer**, using **Spring Data JPA** and **Hibernate** for object-relational mapping. This abstraction allows Java entities to be seamlessly mapped to relational database tables while simplifying CRUD operations and maintaining clean separation between the API and persistence layers.
+4. **Cloud Data Storage:**  
+   All employee data is persisted in a **managed MySQL database hosted on Aiven**. The backend connects to the database using a secure **JDBC connection**, ensuring reliable data storage and retrieval within a cloud-managed relational database environment.
+5. **Containerization & Deployment:**  
+   The backend service is packaged into a **Docker container**, enabling consistent runtime environments across development and deployment. The containerized Spring Boot application is hosted on **Render**, while the React frontend is deployed on **Vercel**. Both platforms are connected to the GitHub repository, enabling **automatic CI/CD deployments** whenever new changes are pushed.
 ---
+## Challenges Faced During Development
+
+### 1. Dockerizing a Spring Boot Application
+**The Problem** :- During containerization, the backend container failed to start because the **MySQL JDBC driver was not being recognized within the container environment.
+Although the project ran correctly locally, the Docker environment produced errors such as:
+<br/>
+``Cannot load driver class: com.mysql.cj.jdbc.Driver`` <br/>
+**The Solution**:-
+- Verified dependency packaging within the Spring Boot build.
+- Ensured the **JAR file bundled all dependencies correctly**.
+- Rebuilt the container with proper `Dockerfile` configuration.
+- Driver configuration.
+- Started running Aiven MySQL database and fixed wrong database specification issue in AIVEN_MYSQL_URI specification.
+
+## Local Development Setup
+#### Backend (Spring Boot)
+1. cd ems-backend
+2. mvn clean install
+3. mvn spring-boot:run
+
+#### Frontend (React)
+1. cd ems-frontend
+2. npm install
+3. npm run dev
+
+#### Docker Setup
+1. docker build -t ems-backend .
+2. docker run -p 8080:8080 ems-backend
+
+## References
+
+
+1. [Dependency 'mysql:mysql-connector-java:8.0.29' not found](https://stackoverflow.com/questions/72580794/dependency-mysqlmysql-connector-java8-0-29-not-found) | 2. [Deploying SpringBoot application in Render](https://medium.com/@pmanaktala/deploying-a-spring-boot-application-on-render-4e757dfe92ed)
+
+---
+<div align="center">
+  
+Made by **Neha K Vallappil** •
+[LinkedIn](https://www.linkedin.com/in/nehakvallappil)
+</div>
