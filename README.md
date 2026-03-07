@@ -49,7 +49,7 @@ Manual record-keeping and local data storage create significant operational risk
 
 </div>
 
-# Key Features
+## Key Features
 
 - **Employee CRUD Operations**  
   Add, update, and delete employee records through a RESTful backend.
@@ -90,16 +90,13 @@ Manual record-keeping and local data storage create significant operational risk
 
 This project originally began in **October 2025** as my first implementation of a full-stack **Spring Boot CRUD application** using a local MySQL database and a basic frontend interface.  
 During later iterations, I significantly upgraded both the **user interface** and the **infrastructure architecture**, introducing containerization, cloud deployment, and a more refined UI/UX layer.
-
-These improvements reflect a transition from a **local prototype** to a **cloud-ready full stack system**.
-
 <br>
 
 <div align="center">
 
 | Initial Version (Oct 2025) | Upgraded Version |
 |---|---|
-| <img src="" width="450"/> | <img src="new-ui.png" width="450"/> |
+| <img src="readmeassets/old-ui.png" width="450"/> | <img src="readmeassets/new-ui.png" width="450"/> |
 | Basic Bootstrap-style interface with minimal styling. | Modernized UI with improved layout, color system, and component consistency. |
 
 </div>
@@ -112,8 +109,8 @@ These improvements reflect a transition from a **local prototype** to a **cloud-
 - Redesigned the layout with a more structured **staff dashboard interface**.
 - Improved visual hierarchy for the **employee roster table**.
 - Added a refined **color palette and component styling** for buttons and actions.
-- Enhanced navigation flow for **employee creation and updates**.
-- Introduced a more polished **search bar and action controls**.
+- Streamlined navigation for **employee creation and updates**.
+- Added enhanced controls including a **search bar and dark mode toggle**.
 
 **Infrastructure & Platform Upgrades**
 - Migrated from **local MySQL** to **Aiven managed MySQL** for cloud-based persistence.
