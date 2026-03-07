@@ -21,10 +21,7 @@ function App() {
   }, [darkMode]);
 
   return (
-    <div
-      className={`flex flex-col min-h-screen transition-colors duration-300
-    ${darkMode ? "dark bg-gray-900 text-white" : "bg-[#8686AC] text-black"}`}
-    >
+    <div className={darkMode ? "dark" : ""}>
       <BrowserRouter>
         <div
           className={`min-h-screen transition-colors duration-300
