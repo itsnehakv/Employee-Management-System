@@ -112,8 +112,8 @@ Although the project ran correctly locally, the Docker environment produced erro
 3. npm run dev
 
 #### Docker Setup
-1. docker build -t ems-backend .
-2. docker run -p 8080:8080 ems-backend
+1. docker build -t staffsync-backend .
+2. docker run -p 8080:8080 staffsync-backend
 
 ## References
 
