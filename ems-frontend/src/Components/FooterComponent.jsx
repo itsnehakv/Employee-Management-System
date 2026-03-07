@@ -4,7 +4,7 @@ export const FooterComponent = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto py-4 bg-gradient-to-r from-[#272757] to-[#505081] shadow-inner">
+    <footer className="mt-auto py-4 bg-gradient-to-r from-[#272757] to-[#505081] shadow-inner fixed bottom-0 w-full">
       <div className="flex flex-col text-center md:text-left">
         <span className="text-[#b3b3d6] text-sm josefin-sans-link">
           StaffSync — Employee Management Simplified
