@@ -44,7 +44,6 @@ initialValue: The initial value of the state when the component first renders.
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching employee data:", error);
         setLoading(false);
       });
   }
@@ -57,7 +56,6 @@ initialValue: The initial value of the state when the component first renders.
   }
 
   function removeEmployee(id) {
-    console.log("Deleting employee:", id);
     Swal.fire({
       title: "Are you sure?",
       text: "This employee will be permanently deleted.",
@@ -80,7 +78,6 @@ initialValue: The initial value of the state when the component first renders.
             getAllEmployees(); // refresh list
           })
           .catch((error) => {
-            console.error("Delete failed:", error);
             Swal.fire({
               icon: "error",
               title: "Error",
@@ -125,7 +122,7 @@ initialValue: The initial value of the state when the component first renders.
               />
             </div>
             <p className="text-md text-[#272757] mb-2 dark:text-gray-300 josefin-sans-link">
-              Total Employees:{" "}
+              Total Employees:
               <span className="font-semibold">{employees.length}</span>
             </p>
           </div>
@@ -145,8 +142,6 @@ initialValue: The initial value of the state when the component first renders.
             </thead>
             <tbody>
               {filteredEmployees.map((employee) => {
-                console.log(employee.dob, employee.dept);
-
                 return (
                   <tr
                     key={employee.id}

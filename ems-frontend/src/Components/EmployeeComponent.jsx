@@ -57,7 +57,6 @@ const EmployeeComponent = () => {
         dob,
         dept,
       }; //This is shorthand. JavaScript allows this when the key name and the variable name are the same.
-      console.log(employee);
 
       if (id) {
         updateEmployeeById(id, employee).then((response) => {
@@ -163,7 +162,12 @@ const EmployeeComponent = () => {
           setdept(employee.dept);
         })
         .catch((error) => {
-          console.error(error);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Could not load employee details. Please try again.",
+            confirmButtonColor: "#505081",
+          });
         });
     }
   }, [id]);
@@ -177,7 +181,7 @@ const EmployeeComponent = () => {
           ← Back to Staff Roster
         </button>
         {pageTitle()}
-        <form>
+        <form onSubmit={SaveOrUpdateEmployee}>
           {/* First Name */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700  josefin-sans-link">
@@ -276,11 +280,13 @@ const EmployeeComponent = () => {
             </label>
             <br></br>
             <select
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
          bg-white text-gray-700 cursor-pointer"
+              value={dept}
+              onChange={handledept}
             >
-              <option value="" disabled selected class="text-gray-400">
+              <option value="" disabled className="text-gray-400">
                 Select Department
               </option>
               <option value="HR" className="bg-indigo-200">
@@ -306,7 +312,7 @@ const EmployeeComponent = () => {
           <br />
           <button
             type="submit"
-            onClick={SaveOrUpdateEmployee}
+            // onSubmit={SaveOrUpdateEmployee}
             className="w-full bg-[#505081] text-white py-2 rounded-md josefin-sans-link hover:bg-[#3f3f6a] transition"
           >
             Submit
