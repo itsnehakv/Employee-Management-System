@@ -86,6 +86,46 @@ Manual record-keeping and local data storage create significant operational risk
 5. **Containerization & Deployment:**  
    The backend service is packaged into a **Docker container**, enabling consistent runtime environments across development and deployment. The containerized Spring Boot application is hosted on **Render**, while the React frontend is deployed on **Vercel**. Both platforms are connected to the GitHub repository, enabling **automatic CI/CD deployments** whenever new changes are pushed.
 ---
+## UI Evolution & Platform Upgrades
+
+This project originally began in **October 2025** as my first implementation of a full-stack **Spring Boot CRUD application** using a local MySQL database and a basic frontend interface.  
+During later iterations, I significantly upgraded both the **user interface** and the **infrastructure architecture**, introducing containerization, cloud deployment, and a more refined UI/UX layer.
+
+These improvements reflect a transition from a **local prototype** to a **cloud-ready full stack system**.
+
+<br>
+
+<div align="center">
+
+| Initial Version (Oct 2025) | Upgraded Version |
+|---|---|
+| <img src="" width="450"/> | <img src="new-ui.png" width="450"/> |
+| Basic Bootstrap-style interface with minimal styling. | Modernized UI with improved layout, color system, and component consistency. |
+
+</div>
+
+<br>
+
+### Key Improvements
+
+**User Interface Enhancements**
+- Redesigned the layout with a more structured **staff dashboard interface**.
+- Improved visual hierarchy for the **employee roster table**.
+- Added a refined **color palette and component styling** for buttons and actions.
+- Enhanced navigation flow for **employee creation and updates**.
+- Introduced a more polished **search bar and action controls**.
+
+**Infrastructure & Platform Upgrades**
+- Migrated from **local MySQL** to **Aiven managed MySQL** for cloud-based persistence.
+- Implemented **Docker containerization** for the Spring Boot backend to standardize runtime environments.
+- Deployed the **React frontend to Vercel** and the **Spring Boot backend to Render**.
+- Enabled **CI/CD style deployment pipelines** through Git-based automatic builds.
+
+**Engineering Impact**
+- Transitioned the project from a **locally running prototype** to a **cloud-deployed full stack application**.
+- Practiced **containerization and deployment workflows**, which are critical for real-world backend engineering.
+- Improved maintainability and scalability by separating **frontend, backend, and database services**.
+
 ## Challenges Faced During Development
 
 ### 1. Dockerizing a Spring Boot Application
@@ -116,7 +156,6 @@ Although the project ran correctly locally, the Docker environment produced erro
 2. docker run -p 8080:8080 staffsync-backend
 
 ## References
-
 
 1. [Dependency 'mysql:mysql-connector-java:8.0.29' not found](https://stackoverflow.com/questions/72580794/dependency-mysqlmysql-connector-java8-0-29-not-found) | 2. [Deploying SpringBoot application in Render](https://medium.com/@pmanaktala/deploying-a-spring-boot-application-on-render-4e757dfe92ed)
 
