@@ -6,6 +6,7 @@ import {
 } from "../Services/EmployeeService";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const EmployeeComponent = () => {
   const [firstName, setfirstName] = useState("");
@@ -59,24 +60,27 @@ const EmployeeComponent = () => {
       console.log(employee);
 
       if (id) {
-        //if id is present in URL, then only call updateEmployeeById
-        updateEmployeeById(id, employee)
-          .then((response) => {
-            console.log("Employee data updated successfully", response.data);
-            navigate("/employees"); //After updating employee, navigate to employee list page
-          })
-          .catch((error) => {
-            console.error("Error updating employee data:", error);
+        updateEmployeeById(id, employee).then((response) => {
+          Swal.fire({
+            icon: "success",
+            title: "Employee Updated",
+            text: "Employee details updated successfully!",
+            confirmButtonColor: "#505081",
+          }).then(() => {
+            navigate("/employees");
           });
+        });
       } else {
-        createEmployee(employee)
-          .then((response) => {
-            console.log("Employee data saved successfully", response.data);
-            navigate("/employees"); //After adding employee, navigate to employee list page
-          })
-          .catch((error) => {
-            console.error("Error saving employee data:", error);
+        createEmployee(employee).then((response) => {
+          Swal.fire({
+            icon: "success",
+            title: "Employee Added",
+            text: "Employee added successfully!",
+            confirmButtonColor: "#505081",
+          }).then(() => {
+            navigate("/employees");
           });
+        });
       }
     }
   }
@@ -130,15 +134,16 @@ const EmployeeComponent = () => {
   function pageTitle() {
     if (id) {
       return (
-        <h2 className="text-center josefin-sans-link">
+        <h2 className="text-2xl font-semibold text-center josefin-sans-link text-gray-800">
           <br />
           Update Employee
         </h2>
       );
     } else {
       return (
-        <h2 className="text-center josefin-sans-link">
-          <br></br>Add Employee
+        <h2 className="text-2xl font-semibold text-center josefin-sans-link text-gray-800 ">
+          <br />
+          Add Employee
         </h2>
       );
     }
@@ -163,137 +168,140 @@ const EmployeeComponent = () => {
     }
   }, [id]);
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="flex items-center justify-center py-16">
       <div className="bg-white shadow-lg rounded-lg w-full max-w-lg p-6">
+        <button
+          onClick={() => navigate("/employees")}
+          className="text-sm text-[#505081] hover:underline mb-2"
+        >
+          ← Back to Employees
+        </button>
         {pageTitle()}
-        {/* <div className="card-body "> */}
-        <div className="bg-white shadow-lg rounded-lg w-full max-w-lg p-6">
-          <form>
-            {/* First Name */}
-            <div className="form-group mb-2">
-              <label className="form-label josefin-sans-link">
-                First Name :
-              </label>
-              <input
-                type="text"
-                placeholder="Enter First Name"
-                name="firstName"
-                className={`form-control ${
-                  errors.firstName ? "is-invalid" : ""
-                }`} //is-invalid is from bootstrap; this statement is like if-else
-                value={firstName}
-                onChange={handlefirstName}
-              />
-              {errors.firstName && (
-                <div className="invalid-feedback">{errors.firstName} </div>
-              )}
-            </div>
+        <form>
+          {/* First Name */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700  josefin-sans-link">
+              First Name :
+            </label>
+            <input
+              type="text"
+              placeholder="Enter First Name"
+              name="firstName"
+              className={`form-control ${errors.firstName ? "is-invalid" : ""}`}
+              //is-invalid is from bootstrap; this statement is like if-else
+              value={firstName}
+              onChange={handlefirstName}
+            />
+            {errors.firstName && (
+              <p className="text-red-500 text-sm mt-1">{errors.firstName} </p>
+            )}
+          </div>
 
-            {/* Last Name */}
-            <div className="form-group mb-2">
-              <label className="form-label josefin-sans-link">
-                Last Name :
-              </label>
-              <input
-                type="text"
-                placeholder="Enter Last Name"
-                name="lastName"
-                className={`form-control ${
-                  errors.lastName ? "is-invalid" : ""
-                }`}
-                value={lastName}
-                onChange={handlelastName}
-              />
-              {errors.lastName && (
-                <div className="invalid-feedback">{errors.lastName} </div>
-              )}
-            </div>
+          {/* Last Name */}
+          <div className="form-group mb-2">
+            <label className="form-label josefin-sans-link text-gray-700">
+              Last Name :
+            </label>
+            <input
+              type="text"
+              placeholder="Enter Last Name"
+              name="lastName"
+              className={`form-control ${errors.lastName ? "is-invalid" : ""}`}
+              value={lastName}
+              onChange={handlelastName}
+            />
+            {errors.lastName && (
+              <div className="invalid-feedback">{errors.lastName} </div>
+            )}
+          </div>
 
-            {/* Email ID */}
-            <div className="form-group mb-2">
-              <label className="form-label josefin-sans-link">Email :</label>
-              <input
-                type="text"
-                placeholder="Enter Email"
-                name="email"
-                className={`form-control ${errors.email ? "is-invalid" : ""}`}
-                value={email}
-                onChange={handleemail}
-              />
-              {errors.email && (
-                <div className="invalid-feedback">{errors.email} </div>
-              )}
-            </div>
+          {/* Email ID */}
+          <div className="form-group mb-2">
+            <label className="form-label josefin-sans-link text-gray-700">
+              Email :
+            </label>
+            <input
+              type="text"
+              placeholder="Enter Email"
+              name="email"
+              className={`form-control ${errors.email ? "is-invalid" : ""}`}
+              value={email}
+              onChange={handleemail}
+            />
+            {errors.email && (
+              <div className="invalid-feedback">{errors.email} </div>
+            )}
+          </div>
 
-            {/* Phone No */}
-            <div className="form-group mb-2">
-              <label className="form-label josefin-sans-link">
-                Phone No. :
-              </label>
-              <input
-                type="text"
-                placeholder="Enter Phone No."
-                name="phoneno"
-                className={`form-control ${errors.phoneno ? "is-invalid" : ""}`}
-                value={phoneno}
-                onChange={handlephoneNo}
-              />
-              {errors.phoneno && (
-                <div className="invalid-feedback">{errors.phoneno} </div>
-              )}
-            </div>
+          {/* Phone No */}
+          <div className="form-group mb-2">
+            <label className="form-label josefin-sans-link text-gray-700">
+              Phone No. :
+            </label>
+            <input
+              type="text"
+              placeholder="Enter Phone No."
+              name="phoneno"
+              className={`form-control ${errors.phoneno ? "is-invalid" : ""}`}
+              value={phoneno}
+              onChange={handlephoneNo}
+            />
+            {errors.phoneno && (
+              <div className="invalid-feedback">{errors.phoneno} </div>
+            )}
+          </div>
 
-            {/* DOB */}
-            <div className="form-group mb-2">
-              <label className="form-label josefin-sans-link">
-                Date Of Birth :
-              </label>
-              <input
-                type="date"
-                placeholder="Enter Date Of Birth"
-                name="dob"
-                className={`form-control ${errors.dob ? "is-invalid" : ""}`}
-                value={dob}
-                onChange={handleDOB}
-              />
-              {errors.dob && (
-                <div className="invalid-feedback">{errors.dob} </div>
-              )}
-            </div>
+          {/* DOB */}
+          <div className="form-group mb-2">
+            <label className="form-label josefin-sans-link text-gray-700">
+              Date Of Birth :
+            </label>
+            <input
+              type="date"
+              placeholder="Enter Date Of Birth"
+              name="dob"
+              className={`form-control ${errors.dob ? "is-invalid" : ""}`}
+              value={dob}
+              onChange={handleDOB}
+            />
+            {errors.dob && (
+              <div className="invalid-feedback">{errors.dob} </div>
+            )}
+          </div>
 
-            {/* Department */}
-            <div className="form-group mb-2">
-              <label className="form-label josefin-sans-link">
-                Department :
-              </label>
-              <br></br>
-              <select
-                value={dept}
-                onChange={handledept}
-                style={{ width: "100%" }}
-                className={`form-control ${errors.dept ? "is-invalid" : ""}`}
-              >
-                <option value="">Select Department</option>
-                <option value="HR">HR</option>
-                <option value="IT">IT</option>
-                <option value="Sales">Sales</option>
-                <option value="Product Management">Product Management</option>
-                <option value="Finance">Finance</option>
-              </select>
-              {errors.dept && (
-                <div className="invalid-feedback">{errors.dept} </div>
-              )}
-            </div>
-            <br />
-            <button
-              className="bg-[#4ab54a] text-white px-3 py-1 josefin-sans-link rounded-md text-sm hover:bg-[#6ec46e] transition shadow-sm"
-              type="submit"
-              onClick={SaveOrUpdateEmployee}
+          {/* Department */}
+          <div className="form-group mb-2">
+            <label className="form-label josefin-sans-link text-gray-700">
+              Department :
+            </label>
+            <br></br>
+            <select
+              value={dept}
+              onChange={handledept}
+              style={{ width: "100%" }}
+              className={`form-control ${errors.dept ? "is-invalid" : ""}`}
             >
-              Submit
-            </button>
-          </form>
-        </div>
+              <option value="">Select Department</option>
+              <option value="HR">HR</option>
+              <option value="IT">IT</option>
+              <option value="Sales">Sales</option>
+              <option value="Product Management">Product Management</option>
+              <option value="Finance">Finance</option>
+            </select>
+            {errors.dept && (
+              <div className="invalid-feedback">{errors.dept} </div>
+            )}
+          </div>
+          <br />
+          <button
+            type="submit"
+            onClick={SaveOrUpdateEmployee}
+            className="w-full bg-[#505081] text-white py-2 rounded-md josefin-sans-link hover:bg-[#3f3f6a] transition"
+          >
+            Submit
+          </button>
+          <br />
+        </form>
       </div>
     </div>
   );
