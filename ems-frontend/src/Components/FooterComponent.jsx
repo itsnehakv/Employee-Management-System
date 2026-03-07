@@ -13,28 +13,33 @@ export const FooterComponent = () => {
         <span className="text-[#9a9ac7] text-xs josefin-sans-link">
           © {year} StaffSync. All Rights Reserved.
         </span>
+        <div className="flex justify-center gap-6 mt-2">
+          <kbd className="px-2 py-1 text-xs font-semibold rounded-md bg-[#3f3f6a] text-[#dcdcff] shadow-sm hover:bg-[#505081] transition">
+            <a
+              href="https://github.com/itsnehakv/Employee-Management-System"
+              target="_blank"
+              rel="noreferrer"
+              className="text-[#b3b3d6] hover:text-white transition no-underline"
+            >
+              GitHub
+            </a>
+          </kbd>
+
+          <kbd className="px-2 py-1 text-xs font-semibold rounded-md bg-[#3f3f6a] text-[#dcdcff] shadow-sm hover:bg-[#505081] transition">
+            <a
+              href="https://www.linkedin.com/in/nehakvallappil"
+              target="_blank"
+              rel="noreferrer"
+              className="text-[#b3b3d6] hover:text-white transition no-underline"
+            >
+              LinkedIn
+            </a>
+          </kbd>
+        </div>
       </div>
       <div className="mt-2 flex justify-center md:justify-end">
         {/* Links */}
-        <div className="flex gap-4 text-sm">
-          <a
-            href="https://github.com/itsnehakv/Employee-Management-System"
-            target="_blank"
-            rel="noreferrer"
-            className="text-[#b3b3d6] hover:text-white transition"
-          >
-            GitHub
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/nehakvallappil"
-            target="_blank"
-            rel="noreferrer"
-            className="text-[#b3b3d6] hover:text-white transition"
-          >
-            LinkedIn
-          </a>
-        </div>
+        <div className="flex gap-4 text-sm"></div>
       </div>
     </footer>
   );
