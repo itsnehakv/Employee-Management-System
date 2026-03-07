@@ -28,17 +28,12 @@ function App() {
       ${darkMode ? "dark bg-gray-900 text-white" : "bg-[#8686AC] text-black"}`}
         >
           <HeaderComponent darkMode={darkMode} setDarkMode={setDarkMode} />
-          <div className="flex-grow">
-            <Routes>
-              <Route path="/" element={<ListEmployeesComponent />} />
-              <Route path="/employees" element={<ListEmployeesComponent />} />
-              <Route path="/add-employee" element={<EmployeeComponent />} />
-              <Route
-                path="/edit-employee/:id"
-                element={<EmployeeComponent />}
-              />
-            </Routes>
-          </div>
+          <Routes>
+            <Route path="/" element={<ListEmployeesComponent />} />
+            <Route path="/employees" element={<ListEmployeesComponent />} />
+            <Route path="/add-employee" element={<EmployeeComponent />} />
+            <Route path="/edit-employee/:id" element={<EmployeeComponent />} />
+          </Routes>
 
           <FooterComponent />
         </div>
