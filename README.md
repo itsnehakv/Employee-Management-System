@@ -126,7 +126,7 @@ During later iterations, I significantly upgraded both the **user interface** an
 ## Challenges Faced During Development
 
 ### 1. Dockerizing a Spring Boot Application
-**The Problem** :- During containerization, the backend container failed to start because the **MySQL JDBC driver was not being recognized within the container environment.
+**The Problem** :- During containerization, the backend container failed to start because the MySQL JDBC driver was not being recognized within the container environment.
 Although the project ran correctly locally, the Docker environment produced errors such as:
 <br/>
 ``Cannot load driver class: com.mysql.cj.jdbc.Driver`` <br/>
