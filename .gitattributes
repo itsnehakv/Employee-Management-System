@@ -1,1 +1,2 @@
 ems-frontend/* linguist-vendored
+*.jsx linguist-detectable=false
